@@ -16,7 +16,7 @@ public class Tour extends Service {
     /**
      * This filed contains information about the type of a vacation.
      */
-    private TourType name;
+    private ServiceType name;
 
     /**
      * This Constructor can be used for creation of following holiday pakages:
@@ -26,7 +26,7 @@ public class Tour extends Service {
      * @param transport type of transfer from home to hotel
      * @param food type of food included
      */
-    public Tour (TourType name, String hotel, String transport, String food, int cost, int duration, String country){
+    public Tour (ServiceType name, String hotel, String transport, String food, int cost, int duration, String country){
         super( cost,  duration,  country);
         this.name = name;
         this.hotel = hotel;
@@ -39,7 +39,7 @@ public class Tour extends Service {
      * This Constructor can be used for creation of SHOPPING_TOUR
      * @param name Type of tour
      */
-    public Tour(TourType name, int cost, int duration, String country){
+    public Tour(ServiceType name, int cost, int duration, String country){
         super( cost, duration, country);
         this.name =name;
         this.transport = "Bus";
@@ -71,11 +71,11 @@ public class Tour extends Service {
         this.hotel = hotel;
     }
 
-    public TourType getName() {
+    public ServiceType getName() {
         return name;
     }
 
-    public void setName(TourType name) {
+    public void setName(ServiceType name) {
         this.name = name;
     }
 }

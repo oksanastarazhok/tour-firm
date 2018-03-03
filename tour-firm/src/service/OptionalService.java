@@ -18,14 +18,23 @@ public class OptionalService extends Service {
      * This Constructor can be used for creation of any of additional supplements.
      * @param cost sum of money that should be paid for any type of service.
      * @param duration number of days.
+     * @param name name of of additional supplements.
+     */
+    public OptionalService(ServiceType name, int duration, int cost ) {
+        super( cost, duration );
+        this.name = name;
+    }
+    /**
+     * This Constructor can be used for creation of visas.
+     * @param cost sum of money that should be paid for any type of service.
+     * @param duration number of days.
      * @param country county name.
      * @param name name of of additional supplements.
      */
-    public OptionalService(int cost, int duration, String country, ServiceType name) {
+    public OptionalService(ServiceType name, String country, int duration, int cost ) {
         super( cost, duration, country );
         this.name = name;
     }
-
     public ServiceType getName() {
         return name;
     }

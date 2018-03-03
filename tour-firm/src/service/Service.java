@@ -25,5 +25,14 @@ public abstract class Service {
         this.duration = duration;
         this.country = country;
     }
+    /**
+     * Constructor is used in child class.
+     * @param cost sum of money that should be paid for any type of service
+     * @param duration number of days.
+         */
+    public Service(int cost, int duration) {
+        this.cost = cost;
+        this.duration = duration;
+            }
 
 }
