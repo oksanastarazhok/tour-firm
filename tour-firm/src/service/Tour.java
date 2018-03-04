@@ -21,13 +21,14 @@ public class Tour extends Service {
     /**
      * This Constructor can be used for creation of following holiday pakages:
      * SEASIDE_HOLIDAYS, CRUISE, GUIDED_TOUR and  THERAPY_TOUR
-     * @param name Type of tour
-     * @param hotel Type of hotel
+     *
+     * @param name      Type of tour
+     * @param hotel     Type of hotel
      * @param transport type of transfer from home to hotel
-     * @param food type of food included
+     * @param food      type of food included
      */
-    public Tour (ServiceType name, String hotel, String transport, String food, int cost, int duration, String country){
-        super( cost,  duration,  country);
+    public Tour(ServiceType name, String hotel, String transport, String food, int cost, int duration, String country) {
+        super( cost, duration, country );
         this.name = name;
         this.hotel = hotel;
         this.transport = transport;
@@ -37,15 +38,29 @@ public class Tour extends Service {
 
     /**
      * This Constructor can be used for creation of SHOPPING_TOUR
+     *
      * @param name Type of tour
      */
-    public Tour(ServiceType name, int cost, int duration, String country){
-        super( cost, duration, country);
-        this.name =name;
+    public Tour(ServiceType name, int cost, int duration, String country) {
+        super( cost, duration, country );
+        this.name = name;
         this.transport = "Bus";
 
     }
 
+    @Override
+    public String toString() {
+
+        return "{" +
+                "cost=" + this.getCost() +
+                ", duration=" + this.getDuration() +
+                ", country='" + this.getCountry() + '\'' +
+                ", food='" + food + '\'' +
+                ", transport='" + transport + '\'' +
+                ", hotel='" + hotel + '\'' +
+                ", name=" + name +
+                '}';
+    }
 
     public String getFood() {
         return food;
