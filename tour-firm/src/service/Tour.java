@@ -44,7 +44,9 @@ public class Tour extends Service {
     public Tour(ServiceType name, int cost, int duration, String country) {
         super( cost, duration, country );
         this.name = name;
-        this.transport = "Bus";
+        this.transport = "bus";
+        this.food = "chips";
+        this.hotel = "Hostel";
 
     }
 
