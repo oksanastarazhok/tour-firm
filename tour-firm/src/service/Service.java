@@ -43,23 +43,14 @@ public abstract class Service {
         return cost;
     }
 
-    public void setCost(int cost) {
-        this.cost = cost;
-    }
 
     public int getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
 
     public String getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

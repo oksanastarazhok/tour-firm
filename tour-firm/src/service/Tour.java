@@ -1,5 +1,7 @@
 package service;
 
+import java.util.Objects;
+
 public class Tour extends Service {
     /**
      * This field describes the food included into tour.
@@ -64,35 +66,37 @@ public class Tour extends Service {
                 '}';
     }
 
-    public String getFood() {
-        return food;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tour)) return false;
+        Tour tour = (Tour) o;
+        return Objects.equals( getFood(), tour.getFood() ) &&
+                Objects.equals( getTransport(), tour.getTransport() ) &&
+                Objects.equals( getHotel(), tour.getHotel() ) &&
+                getName() == tour.getName();
     }
 
-    public void setFood(String food) {
-        this.food = food;
+    @Override
+    public int hashCode() {
+
+        return Objects.hash( getFood(), getTransport(), getHotel(), getName() );
+    }
+
+    public String getFood() {
+        return food;
     }
 
     public String getTransport() {
         return transport;
     }
 
-    public void setTransport(String transport) {
-        this.transport = transport;
-    }
-
     public String getHotel() {
         return hotel;
-    }
-
-    public void setHotel(String hotel) {
-        this.hotel = hotel;
     }
 
     public ServiceType getName() {
         return name;
     }
 
-    public void setName(ServiceType name) {
-        this.name = name;
-    }
 }

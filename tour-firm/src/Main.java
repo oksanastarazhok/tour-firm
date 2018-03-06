@@ -3,24 +3,32 @@ import service.Service;
 import service.ServiceType;
 import service.Tour;
 import travel_agency.Agent;
+
 import java.util.*;
 
 
 public class Main {
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args)  {
+        /**
+         * Contains all available Tours and OptionalServices. Key is String (tours or services) and values for each key are saved in separate ArrayList.
+         */
         HashMap<String, ArrayList<Service>> tourAndService;
+        /**
+         * Creates Tours and Services and put them into HashMap.
+         */
         tourAndService = createTour();
+        /**
+         * Prints all Tours sorted by cost in ascending order. Creates Client object and fill it with meaningful values.
+         * Prints client selection of Tour and OptionalService and overall cost.
+         */
         sell( tourAndService );
 
     }
 
-
-
     private static HashMap<String, ArrayList<Service>> createTour() {
         Service tour1 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "Three star hotel", "bus", "breakfast", 229, 7, "Bulgaria" );
-        Service tour2 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "Five star hotel", "air", "all inclusive", 629, 10, "Bulgaria" );
+        Service tour2 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "Five star hotel", "air", "all_inclusive", 629, 10, "Bulgaria" );
         Service tour3 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "resort", "bus", "breakfast-dinner", 429, 14, "Bulgaria" );
         Service tour4 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "Hostel", "bus", "room_only", 350, 7, "Greece" );
         Service tour5 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "Three star hotel", "air", "breakfast", 541, 10, "Greece" );
@@ -32,8 +40,8 @@ public class Main {
         Service tour11 = new Tour( ServiceType.SEASIDE_HOLIDAYS, "Five star hotel", "air", "breakfast", 389, 7, "Egypt" );
         Service tour12 = new Tour( ServiceType.CRUISE, "liner", "liner", "breakfast", 369, 7, "Antarctic" );
         Service tour13 = new Tour( ServiceType.CRUISE, "liner", "air", "breakfast", 829, 10, "Malta" );
-        Service tour14 = new Tour( ServiceType.CRUISE, "liner", "air", "all inclusive", 799, 10, "Italy" );
-        Service tour15 = new Tour( ServiceType.CRUISE, "liner", "air", "all inclusive", 1400, 14, "Cuba" );
+        Service tour14 = new Tour( ServiceType.CRUISE, "liner", "air", "all_inclusive", 799, 10, "Italy" );
+        Service tour15 = new Tour( ServiceType.CRUISE, "liner", "air", "all_inclusive", 1400, 14, "Cuba" );
         Service tour16 = new Tour( ServiceType.THERAPY_TOUR, "resort", "bus", "breakfast", 500, 7, "Belarus" );
         Service tour17 = new Tour( ServiceType.THERAPY_TOUR, "Four star hotel", "air", "breakfast-dinner", 1500, 7, "Cuba" );
         Service tour18 = new Tour( ServiceType.GUIDED_TOUR, "hostel", "bus", "breakfast", 689, 10, "Italy" );
@@ -47,14 +55,12 @@ public class Main {
 
         Service service1 = new OptionalService( ServiceType.PREPARATION_OF_DOCUMENTS, 7, 20 );
         Service service2 = new OptionalService( ServiceType.VISA_PROCESSING, 14, 60 );
-        Service service3 = new OptionalService( ServiceType.INSURANCE, 30, 15 );
-        Service service4 = new OptionalService( ServiceType.INSURANCE, 60, 30 );
-        Service service5 = new OptionalService( ServiceType.INSURANCE, 90, 45 );
+        Service service3 = new OptionalService( ServiceType.INSURANCE, 60, 30 );
 
         ArrayList tours = new ArrayList<Service>( Arrays.asList( tour1, tour2, tour3, tour4, tour5, tour6, tour7, tour8,
                 tour9, tour10, tour11, tour12, tour13, tour14, tour15, tour16, tour17, tour18, tour19, tour20, tour21,
                 tour22, tour23, tour24, tour25 ) );
-        ArrayList services = new ArrayList<Service>( Arrays.asList( service1, service2, service3, service4, service5 ) );
+        ArrayList services = new ArrayList<Service>( Arrays.asList( service1, service2, service3 ) );
         Map<String, ArrayList<Service>> tourAndService = new HashMap<String, ArrayList<Service>>();
         tourAndService.put( "tours", tours );
         tourAndService.put( "services", services );
@@ -64,10 +70,10 @@ public class Main {
 
     private static void sell(HashMap<String, ArrayList<Service>> tourAndService) {
         Agent agent = new Agent( tourAndService );
-        agent.sellTour();
+            agent.sellTour();
+
 
     }
-
 
 
 }

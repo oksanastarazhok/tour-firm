@@ -5,6 +5,9 @@ import service.Service;
 
 import java.util.Comparator;
 
+/**
+ * This Class helps to sort Tours by cost in ascending order.
+ */
 public class SortByCost implements Comparator<Service> {
 
     @Override

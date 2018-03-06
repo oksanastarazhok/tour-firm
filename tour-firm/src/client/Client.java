@@ -15,7 +15,6 @@ public class Client {
     private int vacation;
 
 
-
     public String getName() {
         return name;
     }
