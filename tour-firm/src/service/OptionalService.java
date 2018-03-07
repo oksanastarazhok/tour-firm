@@ -29,4 +29,8 @@ public class OptionalService extends Service {
                 ", name=" + name +
                 '}';
     }
+
+    public ServiceType getName() {
+        return name;
+    }
 }

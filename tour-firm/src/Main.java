@@ -1,3 +1,4 @@
+import exception.NoToursAvailableException;
 import service.OptionalService;
 import service.Service;
 import service.ServiceType;
@@ -9,7 +10,7 @@ import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws NoToursAvailableException {
         /**
          * Contains all available Tours and OptionalServices. Key is String (tours or services) and values for each key are saved in separate ArrayList.
          */
@@ -70,11 +71,12 @@ public class Main {
 
     private static void sell(HashMap<String, ArrayList<Service>> tourAndService) {
         Agent agent = new Agent( tourAndService );
+        try {
             agent.sellTour();
-
-
+        } catch (NoToursAvailableException e) {
+            System.out.println( e );
+        }
     }
-
 
 }
 

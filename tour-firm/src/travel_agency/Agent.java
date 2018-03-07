@@ -1,7 +1,10 @@
 package travel_agency;
 
 import client.Client;
+import exception.NoToursAvailableException;
+import service.OptionalService;
 import service.Service;
+import service.ServiceType;
 import service.Tour;
 
 import java.util.*;
@@ -27,11 +30,12 @@ public class Agent {
     /**
      * This Constructor is used for creation of Agent object.
      *
-     * @param tourAndService ArrayList contains all available Tours.
+     * @param tourAndService HashMap contains all available Tours and OptionalServices.
      */
     public Agent(HashMap<String, ArrayList<Service>> tourAndService) {
         this.tourAndService = tourAndService;
         clientTours = tourAndService.get( "tours" );
+        clientOptional = tourAndService.get( "services" );
     }
 
     /**
@@ -40,7 +44,7 @@ public class Agent {
      *
      * @throws InputMismatchException
      */
-    public void sellTour() throws InputMismatchException {
+    public void sellTour() throws NoToursAvailableException {
         Scanner sc = new Scanner( System.in );
         System.out.println( "Hello, my name is " + name + ". I can help you to pick the tour. What is your name?" );
         Client client = new Client();
@@ -61,8 +65,8 @@ public class Agent {
             }
         }
         if (clientTours.size() < 1) {
-            System.out.println( "Sorry, it seems I don't have any tour that meets all your requirements. " );
-            return;
+            throw new NoToursAvailableException( "Sorry, it seems I don't have any tour that meets all your requirements. " );
+
         }
         System.out.println( "We can propose " + clientTours.size() + " tours." );
         System.out.println( "Could you please also enter the maximum amount of money you'd like to spend on your tour?" );
@@ -74,8 +78,8 @@ public class Agent {
             }
         }
         if (clientTours.size() < 1) {
-            System.out.println( "Sorry, it seems I don't have any tour that meets all your requirements. " );
-            return;
+            throw new NoToursAvailableException( "Sorry, it seems I don't have any tour that meets all your requirements. " );
+
         }
 
         System.out.println( "We can propose " + clientTours.size() + " tours." );
@@ -96,8 +100,8 @@ public class Agent {
             }
         }
         if (clientTours.size() < 1) {
-            System.out.println( "Sorry, it seems I don't have any tour that meets all your requirements. " );
-            return;
+            throw new NoToursAvailableException( "Sorry, it seems I don't have any tour that meets all your requirements. " );
+
         }
 
         Set<String> foodOptions = new HashSet<>();
@@ -118,8 +122,8 @@ public class Agent {
             }
         }
         if (clientTours.size() < 1) {
-            System.out.println( "Sorry, it seems I don't have any tour that meets all your requirements. " );
-            return;
+            throw new NoToursAvailableException( "Sorry, it seems I don't have any tour that meets all your requirements. " );
+            
         }
 
         if (clientTours.size() == 1) {
@@ -159,22 +163,22 @@ public class Agent {
         switch (clientResponse) {
             case 1:
                 System.out.println( "To prepare documents I need your passport and signature." );
-                clientOptional.add( tourAndService.get( "services" ).get( 0 ) );
+                limitOptionsAmount( ServiceType.PREPARATION_OF_DOCUMENTS );
                 break;
             case 2:
                 System.out.println( "To prepare visa I need 2 photographs, a filled in form and certificate of employment." );
-                clientOptional.add( tourAndService.get( "services" ).get( 1 ) );
+                limitOptionsAmount( ServiceType.VISA_PROCESSING );
                 break;
             case 3:
                 System.out.println( "To prepare insurance for you I need your passport." );
-                clientOptional.add( tourAndService.get( "services" ).get( 2 ) );
+                limitOptionsAmount( ServiceType.INSURANCE );
                 break;
             case 4:
                 System.out.println( "To prepare all required documents I need your passport, 2 photographs, " +
                         "a filled in form and certificate of employment" );
-                clientOptional = tourAndService.get( "services" );
                 break;
             default:
+                clientOptional.clear();
                 System.out.println( "" );
         }
         System.out.println( "Congratulations! You selected the best tour." );
@@ -187,7 +191,7 @@ public class Agent {
     /**
      * Prints final choice made by Client and count total cost of the selected Tour.
      *
-     * @param clientTours ArrayList contains Tour selected by Client.
+     * @param clientTours    ArrayList contains Tour selected by Client.
      * @param clientOptional ArrayList contains OptionalService selected by Client.
      */
     private void summarizeCost(ArrayList<Service> clientTours, ArrayList<Service> clientOptional) {
@@ -198,7 +202,7 @@ public class Agent {
         total += clientTours.get( 0 ).getCost();
         System.out.println();
 
-        if (clientOptional == null) {
+        if (clientOptional == null || clientOptional.size() == 0) {
             System.out.println( "You didn't select any additional services." );
         } else {
             System.out.println( "Your additional services choice:" );
@@ -209,6 +213,21 @@ public class Agent {
         }
         System.out.println( "\nOverall cost is " + total + "$. Thank you!" );
 
+    }
+
+    /**
+     * Removes unnecessary element from list with OptionalService
+     *
+     * @param name type of Service
+     */
+    private void limitOptionsAmount(ServiceType name) {
+        for (int i = 0; i < clientOptional.size(); i++) {
+            OptionalService temp = (OptionalService) clientOptional.get( i );
+            if (!(temp.getName().equals( name ))) {
+                clientOptional.remove( temp );
+                i--;
+            }
+        }
     }
 
     /**
